@@ -9,26 +9,15 @@ import { ArrowRight, Mic, Search, Sparkles } from "lucide-react";
 import { createTrip, listTrips, type TripSummary } from "@/lib/api";
 import { useDisplayName } from "@/lib/useDisplayName";
 import SiteHeader from "@/components/SiteHeader";
+import HeroCollage from "@/components/HeroCollage";
 
-// A contact sheet: each frame is a muted stand-in for the kind of group the app will find.
-const FRAMES = [
-  { label: "Beach", bg: "linear-gradient(180deg, #9CC5C2 0%, #C4DDD8 58%, #E4D6B4 58%, #D8C9A8 100%)", tilt: -3 },
-  { label: "Dinner", bg: "radial-gradient(circle at 50% 70%, #F0DDB8 0%, #D8C9A8 45%, #B7A27A 100%)", tilt: 2 },
-  {
-    label: "Sunset",
-    bg: "radial-gradient(circle at 50% 62%, #F6E3B4 0 9%, transparent 10%), linear-gradient(180deg, #D99A82 0%, #EFC7A2 62%, #7C8FA0 62%, #5F7486 100%)",
-    tilt: -1.5,
-  },
-  { label: "Fort", bg: "linear-gradient(180deg, #CBD8D4 0%, #DDE5E1 45%, #A9B49A 45%, #8C9A7E 100%)", tilt: 1.5 },
-  {
-    label: "Night out",
-    bg: "radial-gradient(circle at 25% 35%, #E8D5B5 0 3%, transparent 4%), radial-gradient(circle at 70% 55%, #E3B9A0 0 4%, transparent 5%), radial-gradient(circle at 45% 75%, #9CC5C2 0 3%, transparent 4%), linear-gradient(180deg, #2F4250 0%, #4B5F6B 100%)",
-    tilt: -2,
-  },
-  { label: "Travel", bg: "linear-gradient(180deg, #DCE4E2 0%, #C7D2D0 50%, #9FB1B3 50%, #8A9FA2 100%)", tilt: 3 },
-  { label: "Friends", bg: "radial-gradient(circle at 30% 30%, #F5E8CF 0%, #E8D5B5 50%, #D4BB93 100%)", tilt: 2 },
-  { label: "Market", bg: "linear-gradient(180deg, #E3C9A4 0%, #D9B58C 40%, #B7A98C 40%, #9C8E72 100%)", tilt: -2.5 },
-  { label: "Stay", bg: "linear-gradient(180deg, #C9D9D6 0%, #A9C3C4 55%, #8FB0B5 55%, #7499A0 100%)", tilt: 1 },
+// soft washes used as the thumbnail of each trip in the list
+const TILES = [
+  "linear-gradient(135deg, #9CC5C2, #5FAFA8)",
+  "linear-gradient(135deg, #F8D7A4, #E88F73)",
+  "linear-gradient(135deg, #D8C9A8, #B98A5E)",
+  "linear-gradient(135deg, #CFE1DD, #84A074)",
+  "linear-gradient(135deg, #3E546B, #1C2B3A)",
 ];
 
 const FEATURES = [
@@ -148,7 +137,7 @@ export default function Home() {
                             <span
                               aria-hidden="true"
                               className="h-11 w-11 shrink-0 rounded-lg"
-                              style={{ background: FRAMES[i % FRAMES.length].bg }}
+                              style={{ background: TILES[i % TILES.length] }}
                             />
                             <span className="min-w-0 flex-1">
                               <span className="block truncate font-medium">{t.name}</span>
@@ -177,21 +166,7 @@ export default function Home() {
             )}
           </motion.section>
 
-          <section aria-hidden="true" className="grid grid-cols-3 gap-4 sm:gap-5">
-            {FRAMES.map((f, i) => (
-              <motion.div
-                key={f.label}
-                initial={{ opacity: 0, y: 24, rotate: 0 }}
-                animate={{ opacity: 1, y: 0, rotate: f.tilt, transition: { delay: 0.15 + i * 0.05 } }}
-                whileHover={{ rotate: 0, scale: 1.05, y: -6 }}
-                transition={{ type: "spring", stiffness: 220, damping: 20 }}
-                className="rounded-sm bg-white p-2 pb-7 shadow-print"
-              >
-                <div className="aspect-[4/5] rounded-[1px]" style={{ background: f.bg }} />
-                <p className="mt-2 font-display text-xs text-ink/60">{f.label}</p>
-              </motion.div>
-            ))}
-          </section>
+          <HeroCollage />
         </main>
       </div>
     </MotionConfig>
