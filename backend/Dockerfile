@@ -1,7 +1,7 @@
 FROM python:3.12-slim
 
 # run as a normal user, which hosts like Hugging Face Spaces require
-RUN useradd -m -u 1000 app
+RUN useradd -m -u 1000 app && mkdir /app && chown app /app
 WORKDIR /app
 ENV HOME=/home/app HF_HOME=/home/app/.cache/huggingface PYTHONUNBUFFERED=1
 
