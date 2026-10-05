@@ -1,0 +1,15 @@
+# dependencies and build output
+node_modules/
+.next/
+*.tsbuildinfo
+.venv/
+__pycache__/
+.pytest_cache/
+
+# secrets: every env file is ignored except the examples
+.env
+.env.*
+!.env.example
+
+# uploaded photos
+backend/media/
